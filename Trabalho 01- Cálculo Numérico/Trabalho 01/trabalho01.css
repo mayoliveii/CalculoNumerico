@@ -1,0 +1,113 @@
+/**** Configuração padrão da página ****/
+body, html{
+    margin: 0;
+    font: 16px "Lato", sans-serif;
+    height: 100%;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+
+}
+/* @font-face {
+    font-family: "Bebas Neue";
+    src:url("fonts/coolvetica\ crammed\ rg.woff")
+} */
+.conteudo-1{
+    color:rgb(3, 8, 25);
+    background-color: white;
+    text-align: center;
+    padding: 50px 80px;
+   
+}
+h3,h4{
+    text-transform: uppercase;
+    color: #032448;
+    text-align: center;
+}
+
+p{
+    margin-bottom: 20px;
+    color:#000000;
+}
+/***Configuração Parallax ***/
+.caixa1, .caixa2, .caixa3, .caixa4 {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.caixa1{
+    background-image: url(imagens/imagem1.png);
+}
+.caixa2{
+    background-image: url(imagens/imagem2.png);
+}
+.caixa3{
+    background-image: url(imagens/imagem3.png) ;
+}
+.caixa4{
+    background-image: url(imagens/imagem4.png);
+}
+/* .imagem1{
+
+}
+
+.imagem2{
+
+} */
+.conteudo-titulos{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffff;
+    background-color: rgb(3, 7, 33);
+    text-transform: uppercase;
+    padding: 20px;
+    font-size: 25px;
+    letter-spacing: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+.conteudo-titulos-continuacao {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffff;
+    background-color: rgb(3, 7, 33);
+    text-transform: uppercase;
+    padding: 20px;
+    font-size: 25px;
+    letter-spacing: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+.conteudo-1 ul{
+    text-decoration: none;
+    list-style: none;
+    color: red;
+}
+.conteudo-1 .btn{
+    background-color: #0e4b8b;
+    display: flex;
+    padding: 14px 19px;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    position: absolute;
+    font-size: 20px;
+    text-align: center;
+    left: 45%;
+    
+}
+
+
+.conteudo-1 .btn:hover{
+    background-color:#73baec;
+    color: #0e4b8b;
+    
+    
+}

@@ -1,0 +1,68 @@
+%NOTA IMPORTANTE
+
+%Questoes explicitamente iguais foram zeradas (mesmos erros, etc).
+
+%Questao 1
+%Demonstracao de conceitos basicos
+
+%Questao 2
+%i)Determinacao dos estados termodinamicos 
+%Estado 1 e 2 atraves das tabelas [0.5 pt]
+
+%Estado 1 Tabela A4 - Shapiro
+T1 = 600; %[C]
+P1 = 10e+6; %[Pa]
+h1 = 3625.3; %[kJ/kg]
+s1 = 6.9029; %[kJ/kg-K]
+
+%Estado 2
+%Vapor saturado Tabela A3 - Shapiro
+T2 = 99.63; %[C]
+P2 = 100e+3; %[Pa]
+s2 = s1; %transferencia de calor e muito pequena ou negligenciavel
+
+%Titulo
+%x = 0.9246
+%h2 = 2505.2 kJ/kg
+
+%ii) Estado 3 
+%Comentado e explicado [0.5 pts]
+
+%iii) Trabalho de eixo na turbina
+%Assumindo que a energia cinetica e potencial podem ser desprezadas
+%We = +1120.1 kj/kg [0.5 pt]
+
+%iv) Estado 4
+%Demonstracao obrigatoria das condicoes e do valor h4 [1.5 pt]
+h4 = h3 + vliq*((P4 - P3)*1e-3); %analise dimensional 
+%h4 = 427.76 kJ/kg
+
+%v) Trabalho realizado pelo compressor
+%Wc = 10.3257 kJ/kg [0.5 pt]
+
+%vi) Eficiencias
+
+%Aquecimento do liq. pressurizado
+%QH = 3.1975e+03 kJ/kg
+
+%Ef_Rankine = 0.3471 [0.5 pts]
+
+%Ef_Carnot = 0.5731 [0.5 pts]
+
+%vii) Diagramas explicado dadas nas aulas [0.5 pt]
+
+%Questao 3
+%A) Grafico [1.0 pt]
+
+%B) [0.5 pt]
+Psat = 164.97; %[ºC]
+
+%C) [1.5 pt]
+%Estado 1
+P = 0.7; %[bar]
+T = 240; %[ºC]
+v1 = 0.3292; %[m3/kg]
+
+%Estado 2
+X = 3/4; 
+%deltaV = -0.0995 m3
