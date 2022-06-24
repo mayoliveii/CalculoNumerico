@@ -1,0 +1,83 @@
+function [factor_Z_final] = testefinalZ(T,P,xr)
+% fator Z pela correlação de Hall-Yarborough
+%% Entrada de dados:
+% xr: chute inicial
+% T: Temperatura do reservatório (K)
+% Tc: Temperatura crítica (K)
+% P: Pressão do reservatório (atm)
+% Pc: Pressão crítica (atm)
+nc= input('Qual o número de componentes da mistura gasosa?: ');
+% P= input('Informe a pressão em atm: ');
+% T= input('Informe a temperatura em Kelvin: ');
+fm= input('Informe a fração molar do constituinte (como vetor): ');
+Tc= input('Informe a temperatura crítica do constituinte (como vetor): ');
+Pc= input('Informe a pressão crítica do constituinte (como vetor): ');
+switch nargin
+     case 0
+        error('Informe os valores de T, P e xr!');
+     case 1
+        error('Informe os valores de P e xr!');
+     case 2
+        error('Informe o valor de xr!');
+end
+%% Processamento
+Ppc=0;
+for k=1:nc
+    Ppc=Ppc+(fm(k)*Pc(k));
+end
+Tpc=0;
+for k=1:nc
+    Tpc=Tpc+(fm(k)*Tc(k));
+end
+Pr=P/Ppc;
+Tr=T/Tpc;
+
+%% Erros
+    if Tr <= 1 
+        disp('Os autores destacaram que não é recomendada a aplicação do método para temperaturas pseudo-reduzidas menores que 1');
+    end
+    if Pr <= 0.1 
+        disp('Os autores destacaram que não é recomendada a aplicação do método para temperaturas pseudo-reduzidas menores que 1');
+    end
+%% Resolvendo a parte da equação não-linear y
+
+X1 = -0.06125*(Pr/Tr)*exp(-1.2*(1-(1/Tr)^2));
+X2 = 14.76/Tr - 9.76/Tr^2 + 4.58/Tr^3;
+X3 = 90.7/Tr - 242.2/Tr^2 + 42.4/Tr^3;
+X4 = 2.18 + 2.82/Tr;
+Syms y
+Z = (X1+ ((y+y^2+y^3+y^4)/((1-y^3) - X2*(y^2) - X3*(y^X4))));
+% dy= (-y^6 + y^4 + 6*y^3 + 3*y^2 +2*y+1)/((1-y^3)^2) - 2*y*(14.76/Tr - 9.76/(Tr^2) + 4.58/(Tr^3)) - (90.7/Tr - 242.2/(Tr^2) + 42.4/(Tr^3))*(2.18+2.82/Tr)*(y^(2.18 + 2.82/Tr -1));
+deriv_y= diff(Z,y);
+%  y =matlabFunction(f0);
+%  deriv_y=matlabFunction(deriv_y);
+%% Método de Newton Raphson para definir f(y)
+iter=0;
+% xr= 0.77; %suposição
+  while (1)
+      xr_old = xr;
+%       xr= xr -f0/deriv_y     
+%       xr = xr - Z(xr)/deriv_y(xr); % Equação de Newton-Raphson
+      xr = xr - ((X1+ ((y+y^2+y^3+y^4)/((1-y^3) - X2*(y^2) - X3*(y^X4))))/ (-y^6 + y^4 + 6*y^3 + 3*y^2 +2*y+1)/((1-y^3)^2) - 2*y*(14.76/Tr - 9.76/(Tr^2) + 4.58/(Tr^3)) - (90.7/Tr - 242.2/(Tr^2) + 42.4/(Tr^3))*(2.18+2.82/Tr)*(y^(2.18 + 2.82/Tr -1))); % Equação de Newton-Raphson 
+      iter= iter + 1;               
+      % Erro Estimado
+      if xr~= 0
+          epest = abs((xr - xr_old)/xr)*100; 
+      end
+      if epest <= eppara || iter >= maxit, break, end
+  end
+ factor_Z_final = (X1*Pr)/fy;
+fprintf('O valor de Ppr é:%10.4f   \n',Pr)
+fprintf('O valor de Tpr é:%10.4f   \n',Tr)
+fprintf('O número total de iterações foi:%3.f   \n',iter)
+fprintf('O valor do fator Z é:%10.4f   \n',factor_Z_final)
+  
+% y=0
+%     while (1)
+%     for i=1:1000
+%         fy = y - ((X1+ ((y+y^2+y^3+y^4)/((1-y^3) - X2*(y^2) - X3*(y^X4))))/ (-y^6 + y^4 + 6*y^3 + 3*y^2 +2*y+1)/((1-y^3)^2) - 2*y*(14.76/Tr - 9.76/(Tr^2) + 4.58/(Tr^3)) - (90.7/Tr - 242.2/(Tr^2) + 42.4/(Tr^3))*(2.18+2.82/Tr)*(y^(2.18 + 2.82/Tr -1)));
+%         factor_Z_t = (X1*Pr)/fy;
+%         if abs((fy-1)/fy) <0.005
+%             factor_Z_t = (X1*Pr)/fy;
+%         end
+%     end   

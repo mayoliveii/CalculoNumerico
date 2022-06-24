@@ -1,0 +1,2 @@
+Para abrir a nossa apresentação, é só baixar e descompactar a pasta do trabalho com TODOS os arquivos em uma nova pasta.
+Depois, clicar no arquivo com extensão HTML e escolher a opção de abrir com Google Chrome (de preferência).
